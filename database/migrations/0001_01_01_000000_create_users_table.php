@@ -23,8 +23,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_type_id')->nullable()->index();
             $table->string('name');
+            $table->string('username');
+            $table->string('phone_number')->unique();
             $table->string('email')->unique();
-            $table->string('indentification_number')->unique();
+            $table->string('identification_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,17 @@ class UserTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $types = [
+            'Public',
+            'Admin',
+            'Super Admin',
+            'Test',
+        ];
+
+        foreach($types as $type) {
+            UserType::create([
+                'name' => $type,
+            ]);
+        }
     }
 }

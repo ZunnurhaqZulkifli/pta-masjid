@@ -46,10 +46,13 @@ class User extends Authenticatable
         ];
     }
 
-
-
     public function payments() 
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
     }
 }
