@@ -1,7 +1,11 @@
+import MasterLayout from "./MasterLayout";
+
 export default function Dashboard() {
     return (
-        <div>
-        <h1>Dashboard</h1>
-        </div>
+        <MasterLayout>
+            <h1>Selamat Datang !</h1>
+
+            
+        </MasterLayout>
     );
 }

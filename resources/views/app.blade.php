@@ -79,7 +79,7 @@
 
 <body data-bs-theme="dark"
       smoothScroll>
-    {{-- @include('nav_bar') --}}
+    @include('nav_bar')
 
     @if (Auth::check())
         {{-- @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')

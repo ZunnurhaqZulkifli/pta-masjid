@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         \App\Http\Middleware\HandleInertiaRequest::class;
+        Spatie\Permission\PermissionServiceProvider::class;
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
