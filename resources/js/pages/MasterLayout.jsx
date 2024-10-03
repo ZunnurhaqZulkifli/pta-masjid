@@ -1,12 +1,9 @@
+import { DoubleNavbar } from "./DoubleNavbar";
+
 export default function MasterLayout({ children }) {
     return(
         <>
-            <div>
-                <div className="navbar">
-                    
-                </div>
-            </div>
-            <div className="p-4">
+            <div className="p-1">
                 {children}
             </div>
         </>

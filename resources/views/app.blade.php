@@ -45,7 +45,7 @@
         var Alert = ReactBootstrap.Alert;
     </script>
 
-    <title>E Learning</title>
+    <title>PTA Masjid</title>
 
     @viteReactRefresh
     @vite(['resources/js/app.jsx', 'resources/css/app.css'])
@@ -68,45 +68,51 @@
     }
 
     .footer-custom {
-		background-color: rgb(77, 0, 165)
-		height: 35px;
-	}
+        background-color: rgb(77, 0, 165) height: 35px;
+    }
 
     .badge {
         border-radius: 2px
     }
 </style>
 
-<body data-bs-theme="dark"
-      smoothScroll>
-    @include('nav_bar')
+<body data-bs-theme="dark" smoothScroll>
 
-    @if (Auth::check())
-        {{-- @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')
-            @include('nav_bar_teacher')
-        @endif
+    <div class="row">
+        @include('nav_bar')
+    
+        <div class="col-lg-10 col-md-9 col-12">
+            <div class="container-fluid py-4">
+                @if (Auth::check())
+                    {{-- @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')
+                    @include('nav_bar_teacher')
+                @endif
+    
+                @if (Auth::user()->hasRole('student') && request()->segment(1) == 'student')
+                    @include('nav_bar_student')
+                @endif --}}
+                @endif
+    
+                <div id="top">
+                    @inertia
+                </div>
+            </div>
+        </div>
+    </div>    
 
-        @if (Auth::user()->hasRole('student') && request()->segment(1) == 'student')
-            @include('nav_bar_student')
-        @endif --}}
+    @if (request()->segment(1) == 'admin')
+        <footer class="footer"
+                style="background-color: aliceblue">
+            <div class="text-dark d-flex ml-2 text-left">
+                <i class="bi bi-c-circle align-self-center">
+                    <a class="text-dark"
+                       style="font-size: 7pt">
+                        Developed By Zunnurhaq Zulkifli
+                    </a>
+                </i>
+            </div>
+        </footer>
     @endif
-
-    <div class="position-relative"
-         id="top">
-        @inertia
-    </div>
-
-	@if(request()->segment(1) == 'admin')
-		<footer class="footer" style="background-color: aliceblue">
-			<div class="text-dark ml-2 text-left d-flex">
-				<i class="bi bi-c-circle align-self-center">
-					<a class="text-dark" style="font-size: 7pt">
-						Developed By Zunnurhaq Zulkifli
-					</a>
-				</i>
-			</div>
-		</footer>
-	@endif
 
 </body>
 

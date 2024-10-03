@@ -11,6 +11,9 @@
         "axios": "^1.7.4",
         "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.47",
+        "postcss-preset-mantine": "^1.17.0",
+        "postcss-simple-vars": "^7.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "sass": "^1.56.1",
@@ -19,6 +22,9 @@
     },
     "dependencies": {
         "@inertiajs/react": "^1.2.0",
+        "@mantine/core": "^7.13.2",
+        "@mantine/hooks": "^7.13.2",
+        "@tabler/icons-react": "^3.19.0",
         "laravel-react-i18n": "^2.0.4",
         "react-bootstrap": "^2.10.4",
         "react-player": "^2.16.0"
