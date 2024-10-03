@@ -47,9 +47,11 @@
 
     <title>PTA Masjid</title>
 
-    @viteReactRefresh
-    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
-    @inertiaHead
+    @if(request()->route()->getName() == 'dashboard')
+        @viteReactRefresh
+        @vite(['resources/js/app.jsx', 'resources/css/app.css'])
+        @inertiaHead
+    @endif
 </head>
 
 <style>
@@ -88,19 +90,13 @@
         @endif
     
         <div class="col-lg-10 col-md-9 col-12">
-            <div class="container-fluid py-4">
-                @if (Auth::check())
-                    {{-- @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')
-                    @include('nav_bar_teacher')
-                @endif
-    
-                @if (Auth::user()->hasRole('student') && request()->segment(1) == 'student')
-                    @include('nav_bar_student')
-                @endif --}}
-                @endif
-    
+            <div class="container-fluid py-4">    
                 <div id="top">
-                    @inertia
+                    @if(request()->route()->getName() == 'dashboard')
+                        @inertia
+                    @else
+                        @yield('content')
+                    @endif
                 </div>
             </div>
         </div>

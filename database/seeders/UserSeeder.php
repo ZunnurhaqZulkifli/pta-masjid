@@ -17,8 +17,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                "user_type_id"          => 1,
-                "name"                  => 'Muhammad Administrator',
+                "name"                  => 'Administrator',
                 "username"              => 'admin',
                 "phone_number"          => '0134065517',
                 "email"                 => 'zunnurhaq123@gmail.com',
@@ -31,7 +30,8 @@ class UserSeeder extends Seeder
         ];
 
         foreach($users as $user) {
-            User::create($user);
+            $user = User::create($user);
+            $user->assignRole('admin');
         }
     }
 }

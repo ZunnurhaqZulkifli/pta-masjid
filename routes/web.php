@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymnetController;
+use App\Http\Controllers\PublicUserController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +17,28 @@ Route::group(
     ],
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        // Route::get('/about-us', [DashboardController::class, 'aboutUs'])->name('about-us');
+        Route::resource('payments', PaymnetController::class);
     }
 );
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::group(
+    [
+        'prefix' => 'admin',
+    ],
+    function () {
+        Route::resource('users', UsersController::class);
+        Route::resource('admin' , AdminController::class);
+    }
+);
 
-Route::resource('user', UsersController::class);
-Route::resource('payment', PaymnetController::class);
+Route::group(
+    [
+        'prefix' => 'public',
+    ],
+    function () {
+        Route::resource('public' , PublicUserController::class);
+        Route::get('statistics', [StatisticController::class, 'index'])->name('statistics');
+    }
+);
 
 Auth::routes();

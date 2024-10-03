@@ -16,10 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->command->call('migrate:fresh');
 
         $this->call([
-            UserTypeSeeder::class,
-            UserSeeder::class,
             RoleSeeder::class,
             PermissionSeeder::class,
+            UserSeeder::class,
             // PaymentStatusSeeder::class,
             // PaymentTypeSeeder::class,
             // PaymentSeeder::class,
