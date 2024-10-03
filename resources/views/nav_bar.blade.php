@@ -6,7 +6,7 @@
           <svg class="bi me-2"
                height="32"
                width="40">
-              <use xlink:href="#bootstrap" />
+              {{-- <use xlink:href="#bootstrap" /> --}}
           </svg>
           <span class="fs-4 fw-bold">Sidebar</span>
       </a>
@@ -19,7 +19,7 @@
                   <svg class="bi me-2"
                        height="16"
                        width="16">
-                      <use xlink:href="#home" />
+                      {{-- <use xlink:href="#home" /> --}}
                   </svg>
                   Home
               </a>
@@ -30,7 +30,7 @@
                   <svg class="bi me-2"
                        height="16"
                        width="16">
-                      <use xlink:href="#speedometer2" />
+                      {{-- <use xlink:href="#speedometer2" /> --}}
                   </svg>
                   Dashboard
               </a>
@@ -41,7 +41,7 @@
                   <svg class="bi me-2"
                        height="16"
                        width="16">
-                      <use xlink:href="#table" />
+                      {{-- <use xlink:href="#table" /> --}}
                   </svg>
                   Orders
               </a>
@@ -52,7 +52,7 @@
                   <svg class="bi me-2"
                        height="16"
                        width="16">
-                      <use xlink:href="#grid" />
+                      {{-- <use xlink:href="#grid" /> --}}
                   </svg>
                   Products
               </a>
@@ -63,7 +63,7 @@
                   <svg class="bi me-2"
                        height="16"
                        width="16">
-                      <use xlink:href="#people-circle" />
+                      {{-- <use xlink:href="#people-circle" /> --}}
                   </svg>
                   Customers
               </a>

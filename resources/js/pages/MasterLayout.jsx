@@ -1,5 +1,3 @@
-import { DoubleNavbar } from "./DoubleNavbar";
-
 export default function MasterLayout({ children }) {
     return(
         <>

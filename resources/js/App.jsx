@@ -5,7 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import { createRoot } from 'react-dom/client';
 
 import '@mantine/core/styles.css';
-import { DoubleNavbar } from "./pages/DoubleNavbar";
+// import { DoubleNavbar } from "./pages/DoubleNavbar";
 // import '@mantine/dates/styles.css';
 // import '@mantine/notifications/styles.css';
 
@@ -22,13 +22,13 @@ createInertiaApp({
     setup({ el, App, props }) {
         createRoot(el).render(
             <MantineProvider>
-                <LaravelReactI18nProvider
-                    locale={"ms_MY"}
-                    fallbackLocale={"en"}
-                    files={import.meta.glob("/lang/*.json")}
-                >
-                    <App {...props} />
-                </LaravelReactI18nProvider>
+                    <LaravelReactI18nProvider
+                        locale={"ms_MY"}
+                        fallbackLocale={"en"}
+                        files={import.meta.glob("/lang/*.json")}
+                    >
+                        <App {...props} />
+                    </LaravelReactI18nProvider>
             </MantineProvider>
         );
     },
