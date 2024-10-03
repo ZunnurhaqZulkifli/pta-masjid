@@ -47,9 +47,7 @@
 
     <title>E Learning</title>
 
-    @viteReactRefresh
-    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
-    @inertiaHead
+    {{-- @vite(['resources/js/app.jsx', 'resources/css/app.css']) --}}
 </head>
 
 <style>
@@ -93,7 +91,7 @@
 
     <div class="position-relative"
          id="top">
-        @inertia
+        @yield('content')
     </div>
 
 	@if(request()->segment(1) == 'admin')
