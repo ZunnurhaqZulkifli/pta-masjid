@@ -18,7 +18,6 @@ Route::group(
         // Route::get('/about-us', [DashboardController::class, 'aboutUs'])->name('about-us');
     }
 );
-// Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

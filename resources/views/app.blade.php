@@ -79,7 +79,13 @@
 <body data-bs-theme="dark" smoothScroll>
 
     <div class="row">
-        @include('nav_bar')
+
+        @if(Auth::check()) 
+            @include('nav_bar') 
+            
+            @else
+            @include('nav_bar_public') 
+        @endif
     
         <div class="col-lg-10 col-md-9 col-12">
             <div class="container-fluid py-4">
