@@ -1,4 +1,4 @@
-import { StatsGroup } from "./DashboardStats";
+import { StatsGroup } from "./dashboard_stats";
 
 export default function Dashboard() {
     return (

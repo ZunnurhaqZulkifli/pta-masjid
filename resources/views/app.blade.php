@@ -89,7 +89,7 @@
         @endif
     
         <div class="col-lg-10 col-md-9 col-12">
-            <div class="container-fluid py-4">    
+            <div class="container-fluid py-4">
                 <div id="top">
                     @if(request()->route()->getName() == 'dashboard')
                         @inertia
@@ -101,7 +101,7 @@
         </div>
     </div>    
 
-    @if (request()->segment(1) == 'admin')
+    @if (request()->user()->hasRole('admin'))
         <footer class="footer"
                 style="background-color: aliceblue">
             <div class="text-dark d-flex ml-2 text-left">

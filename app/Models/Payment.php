@@ -9,8 +9,35 @@ class Payment extends Model
 {
     use HasFactory;
     
-    protected $guarded = [
+    protected $fillable = [
         'id',
+        'payment_type_id',
+        'user_id',
+        'name',
+        'amount',
+        'reference_number',
+        'created_at',
+        'updated_at',
     ];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class);
+    }
+
+    public function paymentStatus()
+    {
+        return $this->belongsTo(PaymentStatus::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }

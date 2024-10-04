@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class PaymentsController extends Controller
 {
@@ -11,7 +15,14 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::all();
+        $user = Auth::user();
+        
+        return Inertia::render('payments/index',[
+            'payments' => $payments,
+            'user' => $user,
+        ]);
+        
     }
 
     /**
@@ -19,7 +30,7 @@ class PaymentsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('payments/create');
     }
 
     /**
@@ -27,15 +38,19 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'user_id' => 'required',
+            'amount' => 'required',
+            'description' => 'required',
+        ]);
+    }   
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

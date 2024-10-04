@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        return Inertia ::render('Dashboard', [
+        return Inertia ::render('dashboards/dashboard', [
             'user' => $user,
         ]);
     }

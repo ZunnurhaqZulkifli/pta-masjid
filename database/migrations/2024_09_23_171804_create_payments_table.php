@@ -28,6 +28,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // sumbangan, wakaf, project, kutipan
+        Schema::create('payment_methods', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('status')->default('active');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('payment_type_id')->constrained()->onDelete('cascade');
@@ -46,6 +55,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('payments');
         Schema::dropIfExists('payment_types');
+        Schema::dropIfExists('payment_methods');
         Schema::dropIfExists('payment_statuses');
     }
 };

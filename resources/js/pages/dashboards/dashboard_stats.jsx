@@ -1,5 +1,5 @@
 import { Text } from '@mantine/core';
-import classes from './DashboardStats.module.css';
+import classes from './dashboard_stats.module.css';
 
 const data = [
   {

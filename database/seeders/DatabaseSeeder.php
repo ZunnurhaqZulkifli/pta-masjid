@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PermissionSeeder::class,
             UserSeeder::class,
-            // PaymentStatusSeeder::class,
-            // PaymentTypeSeeder::class,
-            // PaymentSeeder::class,
+            PaymentStatusSeeder::class,
+            PaymentTypeSeeder::class,
+            PaymentMethodSeeder::class,
+            PaymentSeeder::class,
             // ProjectSeeder::class,
             // TransactionSeeder::class, 
         ]);

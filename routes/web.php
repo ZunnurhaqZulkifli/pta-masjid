@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PaymnetController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\PublicUserController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UsersController;
@@ -17,7 +17,7 @@ Route::group(
     ],
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // dashboard
-        Route::resource('payments', PaymnetController::class); // senarai bayaran
+        Route::resource('payments', PaymentsController::class); // senarai bayaran
     }
 );
 
