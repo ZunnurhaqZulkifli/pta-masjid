@@ -15,14 +15,18 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::all();
-        $user = Auth::user();
-        
-        return Inertia::render('payments/index',[
+        $payments = Payment::
+        orderBy('id', 'asc')
+        ->with(
+            'user',
+            'paymentType',
+            // 'status',
+            // 'method'
+        )->paginate(15);
+
+        return view('payments.index', [
             'payments' => $payments,
-            'user' => $user,
         ]);
-        
     }
 
     /**

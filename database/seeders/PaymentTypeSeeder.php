@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\PaymentMethod;
+use App\Models\PaymentType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,7 @@ class PaymentTypeSeeder extends Seeder
         ];
 
         foreach ($types as $type) {
-            PaymentMethod::create([
+            PaymentType::create([
                 'name' => $type,
                 'created_at' => now(),
                 'updated_at' => now(),

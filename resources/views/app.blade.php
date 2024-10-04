@@ -101,18 +101,20 @@
         </div>
     </div>    
 
-    @if (request()->user()->hasRole('admin'))
-        <footer class="footer"
-                style="background-color: aliceblue">
-            <div class="text-dark d-flex ml-2 text-left">
-                <i class="bi bi-c-circle align-self-center">
-                    <a class="text-dark"
-                       style="font-size: 7pt">
-                        Developed By Zunnurhaq Zulkifli
-                    </a>
-                </i>
-            </div>
-        </footer>
+    @if(Auth::check()) 
+        @if (request()->user()->hasRole('admin'))
+            <footer class="footer"
+                    style="background-color: aliceblue">
+                <div class="text-dark d-flex ml-2 text-left">
+                    <i class="bi bi-c-circle align-self-center">
+                        <a class="text-dark"
+                        style="font-size: 7pt">
+                            Developed By Zunnurhaq Zulkifli
+                        </a>
+                    </i>
+                </div>
+            </footer>
+        @endif
     @endif
 
 </body>

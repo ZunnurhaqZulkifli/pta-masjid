@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -22,11 +23,9 @@ class DatabaseSeeder extends Seeder
             PaymentStatusSeeder::class,
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
+            ProjectSeeder::class,
             PaymentSeeder::class,
-            // ProjectSeeder::class,
             // TransactionSeeder::class, 
         ]);
-
-        User::factory(5)->create();
     }
 }

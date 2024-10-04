@@ -26,18 +26,23 @@ class Payment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function type()
+    public function paymentType()
     {
         return $this->belongsTo(PaymentType::class);
     }
 
-    public function status()
+    public function paymentStatus()
     {
         return $this->belongsTo(PaymentStatus::class);
     }
 
-    public function method()
+    public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function totalPayment()
+    {
+        return $this->sum('amount');
     }
 }

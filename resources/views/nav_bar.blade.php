@@ -70,6 +70,17 @@
                         Users
                     </a>
                 </li>
+
+                <li>
+                    <a class="nav-link {{ request()->route()->getName() == 'payments.index' ? 'active bg-gradient' : 'text-white' }}"
+                    href="{{ route('payments.index') }}">
+                        <svg class="bi me-2"
+                            height="16"
+                            width="16">
+                        </svg>
+                        Payments
+                    </a>
+                </li>
             @endif
         </ul>
         <hr class="border-secondary">

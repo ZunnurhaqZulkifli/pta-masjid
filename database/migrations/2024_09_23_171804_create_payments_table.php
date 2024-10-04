@@ -54,8 +54,8 @@ return new class extends Migration
 
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('payment_type_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('payment_type_id')->nullable()->constrained('payment_types')->nullOnDelete();
             $table->string('name');
             $table->string('amount');
             $table->string('reference_number')->unique();
@@ -82,7 +82,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trasnactions');
+        Schema::dropIfExists('transactions');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('payment_methods');

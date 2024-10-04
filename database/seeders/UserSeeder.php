@@ -33,5 +33,7 @@ class UserSeeder extends Seeder
             $user = User::create($user);
             $user->assignRole('admin');
         }
+
+        User::factory(5000)->create();
     }
 }
