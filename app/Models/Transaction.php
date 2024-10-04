@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Transaction extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'id',
         'payment_type_id',
@@ -19,7 +19,6 @@ class Payment extends Model
         'created_at',
         'updated_at',
     ];
-
 
     public function user()
     {
