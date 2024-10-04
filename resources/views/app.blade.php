@@ -78,8 +78,7 @@
     }
 </style>
 
-<body data-bs-theme="dark" smoothScroll>
-
+<body>
     <div class="row">
 
         @if(Auth::check()) 

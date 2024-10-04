@@ -35,7 +35,7 @@ class UsersController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -67,7 +67,7 @@ class UsersController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -78,6 +78,6 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 }

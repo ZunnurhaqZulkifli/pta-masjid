@@ -16,8 +16,8 @@ Route::group(
         'middleware' => HandlePrecognitiveRequests::class,
     ],
     function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('payments', PaymnetController::class);
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // dashboard
+        Route::resource('payments', PaymnetController::class); // senarai bayaran
     }
 );
 
@@ -26,8 +26,7 @@ Route::group(
         'prefix' => 'admin',
     ],
     function () {
-        Route::resource('users', UsersController::class);
-        Route::resource('admin' , AdminController::class);
+        Route::resource('users', UsersController::class); // CRUD users
     }
 );
 

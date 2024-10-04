@@ -28,18 +28,7 @@
                          width="16">
                         {{-- <use xlink:href="#home" /> --}}
                     </svg>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a class="nav-link text-white"
-                   href="#">
-                    <svg class="bi me-2"
-                         height="16"
-                         width="16">
-                        {{-- <use xlink:href="#speedometer2" /> --}}
-                    </svg>
-                    Dashboard
+                    Utama
                 </a>
             </li>
             <li>
@@ -50,7 +39,7 @@
                          width="16">
                         {{-- <use xlink:href="#table" /> --}}
                     </svg>
-                    Orders
+                    Bayaran
                 </a>
             </li>
             <li>
@@ -61,18 +50,7 @@
                          width="16">
                         {{-- <use xlink:href="#grid" /> --}}
                     </svg>
-                    Products
-                </a>
-            </li>
-            <li>
-                <a class="nav-link text-white"
-                   href="#">
-                    <svg class="bi me-2"
-                         height="16"
-                         width="16">
-                        {{-- <use xlink:href="#people-circle" /> --}}
-                    </svg>
-                    Customers
+                    Statistik Bayaran
                 </a>
             </li>
 
