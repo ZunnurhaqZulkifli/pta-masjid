@@ -44,7 +44,8 @@ class UsersController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return view('users.show', compact('user'));
+        $payments = $user->payments()->orderBy('created_at', 'desc')->paginate(2);
+        return view('users.show', compact('user', 'payments'));
     }
 
     /**

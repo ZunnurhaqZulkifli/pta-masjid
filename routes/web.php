@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 // public routes
 Route::group(
     [
-        'middleware' => HandlePrecognitiveRequests::class,
+        // 'middleware' => HandlePrecognitiveRequests::class,
     ],
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // dashboard

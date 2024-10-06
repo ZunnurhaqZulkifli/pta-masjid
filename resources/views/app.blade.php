@@ -47,7 +47,7 @@
 
     <title>PTA Masjid</title>
 
-    @if(request()->route()->getName() == 'dashboard')
+    @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
         @viteReactRefresh
         @vite(['resources/js/app.jsx', 'resources/css/app.css'])
         @inertiaHead
@@ -91,7 +91,7 @@
         <div class="col-lg-10 col-md-9 col-12">
             <div class="container-fluid py-4">
                 <div id="top">
-                    @if(request()->route()->getName() == 'dashboard')
+                    @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
                         @inertia
                     @else
                         @yield('content')

@@ -1,5 +1,5 @@
 import { Text } from '@mantine/core';
-import classes from './dashboard_stats.module.css';
+import classes from '../dashboards/dashboard_stats.module.css';
 
 const data = [
   {
@@ -19,13 +19,17 @@ const data = [
   },
 ];
 
-export function StatsGroup() {
+export function StatisticsCard({ payments, totalPayemnts }) {
+
+  console.log(payments);
 
   const stats = data.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
-      <Text className={classes.title}>{stat.title}</Text>
-      <Text className={classes.description}>{stat.description}</Text>
+      {
+        /* <Text className={classes.count}>{stat.stats}</Text>
+        <Text className={classes.title}>{stat.title}</Text>
+        <Text className={classes.description}>{stat.description}</Text> */
+      }
     </div>
   ));
   return <div className={classes.root}>{stats}</div>;

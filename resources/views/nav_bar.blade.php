@@ -43,8 +43,8 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link text-white"
-                   href="#">
+                <a class="nav-link {{ request()->route()->getName() == 'statistics' ? 'active bg-gradient' : 'text-white' }}"
+                   href="{{ route('statistics') }}">
                     <svg class="bi me-2"
                          height="16"
                          width="16">

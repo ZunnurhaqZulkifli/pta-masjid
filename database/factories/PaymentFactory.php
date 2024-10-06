@@ -18,15 +18,16 @@ class PaymentFactory extends Factory
     public function definition(): array
     {
         $user = User::find(fake()->numberBetween(1, 200));
-
+        $date = fake()->dateTimeBetween('-3 year', 'now');
+        
         return [
             'payment_type_id'  => fake()->numberBetween(1, 5),
             'user_id'          => $user->id,
             'name'             => $user->name,
             'amount'           => fake()->randomFloat(2, 1, 10000),
             'reference_number' => 'REF-' . fake()->unique()->numerify('######') . '-PAY',
-            'created_at'       => now(),
-            'updated_at'       => now(),
+            'created_at'       => $date,
+            'updated_at'       => $date,
         ];
     }
 }
