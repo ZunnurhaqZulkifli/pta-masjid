@@ -19,7 +19,7 @@ class PaymentFactory extends Factory
     {
         $user = User::find(fake()->numberBetween(1, 200));
         $date = fake()->dateTimeBetween('-3 year', 'now');
-        
+
         return [
             'payment_type_id'  => fake()->numberBetween(1, 5),
             'user_id'          => $user->id,
