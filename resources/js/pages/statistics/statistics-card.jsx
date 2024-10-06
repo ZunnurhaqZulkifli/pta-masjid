@@ -1,34 +1,27 @@
 import { Text } from '@mantine/core';
 import classes from '../dashboards/dashboard_stats.module.css';
+import ProductCard from './product-cards';
 
-const data = [
-  {
-    title: 'Page views',
-    stats: '456,133',
-    description: '24% more than in the same month last year, 33% more that two years ago',
-  },
-  {
-    title: 'New users',
-    stats: '2,175',
-    description: '13% less compared to last month, new user engagement up by 6%',
-  },
-  {
-    title: 'Completed orders',
-    stats: '1,994',
-    description: '1994 orders were completed this month, 97% satisfaction rate',
-  },
-];
+export function StatisticsCard({ payments, totalPayments }) {
+    return (
+        <>
+            <div className={classes.root}>
+                {
+                    payments.map((stat, index) => (
+                        <div key={index} className={classes.stat}>
+                            <>
+                                <Text className={classes.count}>{stat.payment_type.name}</Text>
+                                <Text className={classes.title}>
+                                    RM {new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(stat.amount)}
+                                </Text>
+                                <Text className={classes.description}>{stat.payment_type.name}</Text>
+                            </>
+                        </div>
+                    ))
+                }
+            </div>
 
-export function StatisticsCard({ payments, totalPayemnts }) {
-
-  const stats = data.map((stat) => (
-    <div key={stat.title} className={classes.stat}>
-      {
-        /* <Text className={classes.count}>{stat.stats}</Text>
-        <Text className={classes.title}>{stat.title}</Text>
-    <Text className={classes.description}>{stat.description}</Text> */
-      }
-    </div>
-  ));
-  return <div className={classes.root}>{stats}</div>;
+            <ProductCard payments={payments}/>
+        </>
+    );
 }

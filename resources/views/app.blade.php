@@ -76,30 +76,37 @@
     .badge {
         border-radius: 2px
     }
+
+    .all-content {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
 </style>
 
 <body>
-    <div class="row">
-
-        @if(Auth::check()) 
-            @include('nav_bar') 
-            
-            @else
-            @include('nav_bar_public') 
-        @endif
-    
-        <div class="col-lg-10 col-md-9 col-12">
-            <div class="container-fluid py-4">
-                <div id="top">
-                    @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
-                        @inertia
-                    @else
-                        @yield('content')
-                    @endif
+    <div class="all-content">
+        <div class="row">
+            @if(Auth::check()) 
+                @include('nav_bar') 
+                @else
+                @include('nav_bar_public') 
+            @endif
+        
+            <div class="col-lg-10 col-md-9 col-12 main-content">
+                <div class="container-fluid py-4">
+                    <div id="top">
+                        @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
+                            @inertia
+                        @else
+                            @yield('content')
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
     @if(Auth::check()) 
         @if (request()->user()->hasRole('admin'))

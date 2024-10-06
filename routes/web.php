@@ -9,6 +9,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 // public routes
 Route::group(

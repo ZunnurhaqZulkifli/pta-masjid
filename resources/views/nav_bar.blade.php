@@ -3,9 +3,17 @@
     // dd(request()->route()->getName());
 @endphp
 
+<style>
+    .sidebar {
+        flex-shrink: 0;
+        min-height: 120vh;
+        overflow-y: auto;
+    }
+</style>
+
 <div class="col-lg-2 col-md-3 col-12">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white shadow-sm"
-         style="min-height: 100vh; width: 100%; background-color:rgb(239, 187, 0)">
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white shadow-sm"
+         style="background-color:rgb(239, 187, 0)">
         <a class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none mb-3 text-white"
            href="/">
             <div class="row justify-content-center">
