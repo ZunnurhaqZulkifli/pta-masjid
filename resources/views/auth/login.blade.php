@@ -1,18 +1,18 @@
-@extends('layouts.master')
+@extends('app')
 
 @section('content')
     <div class="vh-100">
         <div class="h-100 container py-4">
           <div class="h-25">
-              <h1 class="text-center">Sistem PTA Masjid</h1>
+              <h1 class="text-left">Sistem PTA Masjid</h1>
           </div>
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="col-md-8 col-lg-7 col-xl-6">
-                  <img src="https://via.placeholder.com/600x400"
-                    class="img-fluid" alt="Sample image">
-
+            <div class="row">
+                <div class="col-8">
+                  {{-- @include('auth.register') --}}
                 </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+                <div class="col-4">
+                    <label for="" class="">Sudah Ada Akaun ?</label>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <!-- Email input -->
@@ -51,12 +51,9 @@
                             <a href="#!">Forgot password?</a>
                         </div>
 
-                        <!-- Submit button -->
                         <button class="btn btn-primary btn-lg btn-block"
-                                data-mdb-button-init
-                                data-mdb-ripple-init
-                                type="submit">Sign in</button>
-
+                                type="submit">Sign in
+                        </button>
                     </form>
                 </div>
             </div>

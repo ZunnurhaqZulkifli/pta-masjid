@@ -2,31 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment;
-use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
-class PaymentsController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $payments = Payment::
-        orderBy('id', 'asc')
-        ->with(
-            'user',
-            'paymentType',
-            // 'status',
-            // 'method'
-        )->paginate(15);
-
-        return view('payments.index', [
-            'payments' => $payments,
-        ]);
+        $transactions = Transaction::with('payment', 'paymentType', 'paymentStatus', 'project', 'user')->orderBy('id', 'asc')->paginate(7);
+        return view('transactions.index', compact('transactions'));
     }
 
     /**
@@ -34,12 +21,7 @@ class PaymentsController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-
-        return Inertia::render('payments/create', [
-            'users' => User::all(),
-            'user' => $user ?? null,
-        ]);
+        //
     }
 
     /**
@@ -47,19 +29,16 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'user_id' => 'required',
-            'amount' => 'required',
-            'description' => 'required',
-        ]);
-    }   
+        //
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        
+        Transaction::findOrFail($id);
+        return view('transactions.show', compact('transaction'));
     }
 
     /**
@@ -83,6 +62,8 @@ class PaymentsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+        return redirect()->route('transactions.index');
     }
 }

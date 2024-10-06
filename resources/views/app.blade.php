@@ -47,7 +47,7 @@
 
     <title>PTA Masjid</title>
 
-    @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
+    @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics' ||  request()->route()->getName() == 'payments.create')
         @viteReactRefresh
         @vite(['resources/js/app.jsx', 'resources/css/app.css'])
         @inertiaHead
@@ -88,16 +88,13 @@
 <body>
     <div class="all-content">
         <div class="row">
-            @if(Auth::check()) 
-                @include('nav_bar') 
-                @else
-                @include('nav_bar_public') 
-            @endif
+            
+            @include('nav_bar') 
         
             <div class="col-lg-10 col-md-9 col-12 main-content">
                 <div class="container-fluid py-4">
                     <div id="top">
-                        @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics')
+                        @if(request()->route()->getName() == 'dashboard' ||  request()->route()->getName() == 'statistics' ||  request()->route()->getName() == 'payments.create')
                             @inertia
                         @else
                             @yield('content')

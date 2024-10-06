@@ -27,9 +27,15 @@
         </a>
         <hr class="border-secondary">
         <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="" class="nav-link text-white">
+                    Menu Utama
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a aria-current="page"
-                   class="nav-link text-white {{ request()->route()->getName() == 'dashboard' ? 'active bg-gradient' : '' }}"
+                   class="nav-link {{ request()->route()->getName() == 'dashboard' ? 'active bg-gradient' : '' }} text-white"
                    href="/">
                     <svg class="bi me-2"
                          height="16"
@@ -40,14 +46,14 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link text-white"
-                   href="#">
+                <a class="nav-link {{ request()->route()->getName() == 'payments.create' ? 'active bg-gradient' : 'text-white' }}"
+                   href="{{ route('payments.create') }}">
                     <svg class="bi me-2"
                          height="16"
                          width="16">
                         {{-- <use xlink:href="#table" /> --}}
                     </svg>
-                    Bayaran
+                    Bayar
                 </a>
             </li>
             <li>
@@ -58,71 +64,109 @@
                          width="16">
                         {{-- <use xlink:href="#grid" /> --}}
                     </svg>
-                    Statistik Bayaran
+                    Statistik
                 </a>
             </li>
+            @if(!Auth::check())
+            <li>
+                <a class="nav-link {{ request()->route()->getName() == 'login' ? 'active bg-gradient' : 'text-white' }}"
+                   href="{{ route('login') }}">
+                    <svg class="bi me-2"
+                         height="16"
+                         width="16">
+                        {{-- <use xlink:href="#table" /> --}}
+                    </svg>
+                    Log Masuk
+                </a>
+            </li>
+            @endif
 
-            @if(Auth::user()->hasRole('admin'))
-                <li>
-                    <hr class="divider">
-                    Admin Pannel
-                </li>
+            @if (Auth::check())
+                @if (Auth::user()->hasRole('admin'))
+                    <li>
+                        <hr class="divider">
+                        <a href="" class="nav-link text-white">
+                            Data Sistem
+                        </a>
+                    </li>
 
-                <li>
-                    <a class="nav-link {{ request()->route()->getName() == 'users.index' ? 'active bg-gradient' : 'text-white' }}"
-                    href="{{ route('users.index') }}">
-                        <svg class="bi me-2"
-                            height="16"
-                            width="16">
-                        </svg>
-                        Users
-                    </a>
-                </li>
+                    <li>
+                        <a class="nav-link {{ request()->route()->getName() == 'users.index' ? 'active bg-gradient' : 'text-white' }}"
+                           href="{{ route('users.index') }}">
+                            <svg class="bi me-2"
+                                 height="16"
+                                 width="16">
+                            </svg>
+                            Pengguna
+                        </a>
+                    </li>
 
-                <li>
-                    <a class="nav-link {{ request()->route()->getName() == 'payments.index' ? 'active bg-gradient' : 'text-white' }}"
-                    href="{{ route('payments.index') }}">
-                        <svg class="bi me-2"
-                            height="16"
-                            width="16">
-                        </svg>
-                        Payments
-                    </a>
-                </li>
+                    <li>
+                        <a class="nav-link {{ request()->route()->getName() == 'payments.index' ? 'active bg-gradient' : 'text-white' }}"
+                           href="{{ route('payments.index') }}">
+                            <svg class="bi me-2"
+                                 height="16"
+                                 width="16">
+                            </svg>
+                            Senarai Bayaran
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link {{ request()->route()->getName() == 'transactions.index' ? 'active bg-gradient' : 'text-white' }}"
+                           href="{{ route('transactions.index') }}">
+                            <svg class="bi me-2"
+                                 height="16"
+                                 width="16">
+                            </svg>
+                            Transaksi
+                        </a>
+                    </li>
+                @endif
             @endif
         </ul>
         <hr class="border-secondary">
-        <div class="dropdown">
-            <a aria-expanded="false"
-               class="d-flex align-items-center text-decoration-none dropdown-toggle text-white"
-               data-bs-toggle="dropdown"
-               href="#"
-               id="dropdownUser1">
-                <img alt=""
-                     class="rounded-circle me-2 shadow"
-                     height="32"
-                     src="https://github.com/mdo.png"
-                     width="32">
-                <strong>{{ Auth::user()->name }}</strong>
-            </a>
-            <ul aria-labelledby="dropdownUser1"
-                class="dropdown-menu dropdown-menu-dark text-small shadow-sm">
-                <li><a class="dropdown-item"
-                       href="#">New project...</a></li>
-                <li><a class="dropdown-item"
-                       href="#">Settings</a></li>
-                <li><a class="dropdown-item"
-                       href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
 
-                <form action="{{ route('logout') }}"
-                      method="POST">
-                    @csrf
-                    <li><button class="btn btn-sm">Sign out</button></li>
-                </form>
-            </ul>
-        </div>
+        @if (Auth::check())
+            <div class="dropdown">
+                <a aria-expanded="false"
+                   class="d-flex align-items-center text-decoration-none dropdown-toggle text-white"
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   id="dropdownUser1">
+                    <img alt=""
+                         class="rounded-circle me-2 shadow"
+                         height="32"
+                         src="https://github.com/mdo.png"
+                         width="32">
+                    <strong>{{ Auth::user()->name }}</strong>
+                </a>
+                <ul aria-labelledby="dropdownUser1"
+                    class="dropdown-menu dropdown-menu-dark text-small shadow-sm">
+                    <li><a class="dropdown-item"
+                           href="#">New project...</a></li>
+                    <li><a class="dropdown-item"
+                           href="#">Settings</a></li>
+                    <li><a class="dropdown-item"
+                           href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <form action="{{ route('logout') }}"
+                          method="POST">
+                        @csrf
+                        <li><button class="btn btn-sm">Sign out</button></li>
+                    </form>
+                </ul>
+            </div>
+        @else
+            <div class="dropdown">
+                <a class="d-flex align-items-center text-decoration-none text-white"
+                   href="{{ route('login') }}">
+                    <strong>Login</strong>
+                </a>
+            </div>
+        @endIf
     </div>
 </div>

@@ -29,17 +29,28 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function type()
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+
+    public function paymentType()
     {
         return $this->belongsTo(PaymentType::class);
     }
 
-    public function status()
+    public function paymentStatus()
     {
         return $this->belongsTo(PaymentStatus::class);
     }
 
-    public function method()
+    public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class);
     }
