@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status')->default('active');
-            $table->rememberToken();
             $table->timestamps();
         });
 
@@ -24,7 +23,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status')->default('active');
-            $table->rememberToken();
             $table->timestamps();
         });
 
@@ -33,7 +31,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status')->default('active');
-            $table->rememberToken();
             $table->timestamps();
         });
 

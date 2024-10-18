@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\PaymentMethod;
+use App\Models\PaymentType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +41,10 @@ class PaymentsController extends Controller
         return Inertia::render('payments/create', [
             'users' => User::all(),
             'user' => $user ?? null,
+            'paymentData' => [
+                'paymentTypes' => PaymentType::all(),
+                'paymentMethods' => PaymentMethod::all(),
+            ],
         ]);
     }
 

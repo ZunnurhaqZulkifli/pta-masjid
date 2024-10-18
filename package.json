@@ -8,7 +8,7 @@
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "@vitejs/plugin-react": "^4.2.0",
-        "axios": "^1.7.4",
+        "axios": "^1.7.7",
         "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.47",
@@ -21,13 +21,20 @@
         "vite-plugin-full-reload": "^1.2.0"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/react": "^1.2.0",
         "@mantine/core": "^7.13.2",
+        "@mantine/form": "^7.13.2",
         "@mantine/hooks": "^7.13.2",
+        "@mantine/notifications": "^7.13.3",
         "@tabler/icons-react": "^3.19.0",
+        "laravel-precognition-react": "^0.5.10",
+        "laravel-precognition-react-inertia": "^0.5.10",
         "laravel-react-i18n": "^2.0.4",
+        "lodash": "^4.17.21",
         "mdb-react-ui-kit": "^9.0.0",
         "react-bootstrap": "^2.10.4",
-        "react-player": "^2.16.0"
+        "react-player": "^2.16.0",
+        "ziggy-js": "^2.3.0"
     }
 }

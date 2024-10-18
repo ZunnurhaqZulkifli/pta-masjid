@@ -6,25 +6,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Inertia\Inertia;
 
-class UsersController extends Controller
+class UsersApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->paginate(15);
-        return view('users.index', compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('users.create');
+        //
     }
 
     /**
@@ -52,13 +42,10 @@ class UsersController extends Controller
 
         Auth::login($user);
 
-        $user = Auth::user();
-
-        return Inertia::render('payments/create', [
-            'users' => User::all(),
-            'user' => $user ?? null,
-            'forwarding' => 2,
-        ]);
+        return redirect()->json([
+            'message' => 'User created successfully',
+            'user' => $user
+        ], 201);
     }
 
     /**
@@ -66,18 +53,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
-        $payments = $user->payments()->orderBy('created_at', 'desc')->paginate(2);
-        return view('users.show', compact('user', 'payments'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        //
     }
 
     /**
@@ -85,13 +61,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -99,9 +69,6 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->route('users.index');
+        //
     }
 }
