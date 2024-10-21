@@ -1,0 +1,29 @@
+.pretty-table {
+    width: 98%;
+    height: 100%;
+    margin: '10px auto';
+    borderRadius: '10px';
+    /* border-collapse: collapse;
+    background-color: black; */
+}
+
+.pretty-table th, .pretty-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.pretty-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pretty-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.pretty-table tr:hover {
+    background-color: #ddd;
+}

@@ -12,7 +12,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('payment', 'paymentType', 'paymentStatus', 'project', 'user')->orderBy('id', 'asc')->paginate(7);
+        $transactions = Transaction::with('payment', 'paymentType', 'paymentStatus', 'project', 'user')->orderBy('id', 'desc')->paginate(7);
         return view('transactions.index', compact('transactions'));
     }
 

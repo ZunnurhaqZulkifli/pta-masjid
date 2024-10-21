@@ -59,17 +59,38 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('user_payment', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('reference_number')->unique();
+            $table->string('card_number')->nullable();
+            $table->string('card_user')->nullable();
+            $table->date('card_expiry')->nullable();
+            $table->string('card_cvv')->nullable();
+            
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_number')->nullable();
+
+            $table->string('phone_number')->nullable();
+            
+            $table->timestamps();
+        });
+
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('reason')->nullable();
             $table->decimal('amount', 10, 2);
             $table->string('reference_number')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('payment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_payment_id')->nullable()->constrained('user_payment')->nullOnDelete();
             $table->foreignId('payment_type_id')->constrained()->onDelete('cascade');
+
+            // kalau jenis bayaran sumbangan
+            $table->string('reason')->nullable();
+            $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
+
             $table->foreignId('payment_status_id')->constrained()->onDelete('cascade');
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -80,6 +101,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('transactions');
+        Schema::dropIfExists('user_payment');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('payment_methods');

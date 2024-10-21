@@ -19,14 +19,14 @@
         <table class="table">
             <thead>
                 <tr class="">
-                    <td scope="">Id</td>
-                    <td class="" colspan="2">Name</td>
-                    <td class="">Email</td>
+                    <td scope="">ID</td>
+                    <td class="" colspan="2">Nama</td>
+                    <td class="">Emel</td>
                     <td class="">Username</td>
-                    <td class="">Phone</td>
-                    <td class="">IC NO</td>
-                    <td class="">Created At</td>
-                    <td class="" colspan="2">Actions</td>
+                    <td class="">Nombor Telefon</td>
+                    <td class="">Nric</td>
+                    <td class="">Dijana Pada</td>
+                    {{-- <td class="" colspan="2"></td> --}}
                 </tr>
             </thead>
             <tbody>
@@ -39,11 +39,11 @@
                         <td class="">{{ $user->phone_number }}</td>
                         <td class="">{{ $user->identification_number }}</td>
                         <td class="">{{ $user->created_at }}</td>
-                        <td class="" colspan="2">
+                        {{-- <td class="" colspan="2">
                             <a href="{{ route('users.show', ['user' => $user->id])}}" class="btn btn-sm btn-outline-warning">Show</a>
                             <a href="{{ route('users.edit', ['user' => $user->id])}}" class="btn btn-sm btn-outline-primary">Edit</a>
                             <a href="{{ route('users.destroy', ['user' => $user->id])}}" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>

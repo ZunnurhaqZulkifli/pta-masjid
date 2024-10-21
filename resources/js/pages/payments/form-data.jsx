@@ -1,4 +1,4 @@
-import { TextInput } from "@mantine/core";
+import { Select, TextInput } from "@mantine/core";
 import { Fragment } from "react";
 
 const methodForms = (user, paymentForm) => ({
@@ -13,8 +13,8 @@ const methodForms = (user, paymentForm) => ({
                     name="card_number" 
                     placeholder="Card Number" 
                     label="Card Number"
-                    onChange={(value, data) => {
-                        paymentForm.data.card_number = value.target.value
+                    onChange={(value) => {
+                        paymentForm.setData('card_number', value.target.value)
                     }}
                 />
 
@@ -22,10 +22,11 @@ const methodForms = (user, paymentForm) => ({
                     className="mb-3" 
                     type="text" 
                     name="card_holder" 
-                    placeholder="Card Holder" defaultValue={user.name ?? ''} 
+                    placeholder="Card Holder" 
+                    defaultValue={user.name ?? ''} 
                     label="Card Holder"
-                    onChange={(value, data) => {
-                        paymentForm.data.card_user = value.target.value
+                    onChange={(value) => {
+                        paymentForm.setData('card_user', value.target.value)
                     }}
                 />
 
@@ -36,7 +37,7 @@ const methodForms = (user, paymentForm) => ({
                     placeholder="Expiry Date" 
                     label="Expiry Date"
                     onChange={(value, data) => {
-                        paymentForm.data.card_expiry = value.target.value
+                        paymentForm.setData('card_expiry', value.target.value)
                     }}
                 />
 
@@ -47,7 +48,8 @@ const methodForms = (user, paymentForm) => ({
                     placeholder="CVV" 
                     label="CVV"
                     onChange={(value, data) => {
-                        paymentForm.data.card_ccv = value.target.value
+                        // paymentForm.data.card_ccv = value.target.value
+                        paymentForm.setData('card_cvv', value.target.value)
                     }}
                 />
 
@@ -65,6 +67,7 @@ const methodForms = (user, paymentForm) => ({
                     label="Bank Name"
                     onChange={(value, data) => {
                         paymentForm.data.bank_name = value.target.value
+                        paymentForm.setData('amount', value)
                     }}
                 />
                 
@@ -76,6 +79,7 @@ const methodForms = (user, paymentForm) => ({
                     label="Account Number"
                     onChange={(value, data) => {
                         paymentForm.data.account_number = value.target.value
+                        paymentForm.setData('amount', value)
                     }}
                 />
 
@@ -101,6 +105,7 @@ const methodForms = (user, paymentForm) => ({
                     label="E Wallet Name"
                     onChange={(value, data) => {
                         paymentForm.data.e_wallet_name = value.target.value
+                        paymentForm.setData('amount', value)
                     }}
                 />
             </Fragment>
@@ -125,4 +130,21 @@ const methodForms = (user, paymentForm) => ({
 
 export function getMethodForms(type, user, paymentForm) {
     return methodForms(user, paymentForm)[type];
+}
+
+export function getProjectForms(projects, paymentForm) {
+    return (
+        <Fragment>
+            <label htmlFor="">Project Info</label>
+            <Select
+                name="project"
+                data={projects}
+                placeholder="Sila Pilih Projek"
+                className="mb-3"
+                onChange={(value, data) => {
+                    paymentForm.setData('project_id', value);
+                }}
+            />
+        </Fragment>
+    );
 }

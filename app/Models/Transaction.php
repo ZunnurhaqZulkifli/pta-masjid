@@ -19,6 +19,7 @@ class Transaction extends Model
         'payment_id',
         'payment_type_id',
         'payment_status_id',
+        'user_payment_id',
         'project_id',
         'created_at',
         'updated_at',
@@ -39,7 +40,6 @@ class Transaction extends Model
         return $this->belongsTo(Payment::class);
     }
 
-
     public function paymentType()
     {
         return $this->belongsTo(PaymentType::class);
@@ -53,5 +53,10 @@ class Transaction extends Model
     public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function userPayment()
+    {
+        return $this->belongsTo(UserPayment::class);
     }
 }

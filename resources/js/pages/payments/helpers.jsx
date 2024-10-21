@@ -17,3 +17,12 @@ export function getPaymentTypes(paymentTypes) {
         };
     });
 }
+
+export function getProjects(projects) {
+    return projects.map((project) => {
+        return {
+            value: String(project.id),
+            label: String(project.name),
+        };
+    });
+}
