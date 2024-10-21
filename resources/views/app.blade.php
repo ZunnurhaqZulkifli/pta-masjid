@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    @if(Auth::check()) 
+    {{-- @if(Auth::check()) 
         @if (request()->user()->hasRole('admin'))
             <footer class="footer"
                     style="background-color: aliceblue">
@@ -115,7 +115,7 @@
                 </div>
             </footer>
         @endif
-    @endif
+    @endif --}}
 
 </body>
 

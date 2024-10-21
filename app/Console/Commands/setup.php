@@ -48,10 +48,6 @@ class setup extends Command
         return 1;
     }
 
-    protected function upLocal() {
-        //
-    }
-
     public function handle()
     {
         $progress = $this->output->createProgressBar(100);
@@ -66,6 +62,7 @@ class setup extends Command
         $this->info(' ');
 
         exec('composer install', $output, $returnVar);
+        
         $progress->advance(10);
         if ($returnVar !== 0) {
             $this->info(' ');
@@ -91,6 +88,8 @@ class setup extends Command
         $this->info(' ');
         $this->call('optimize');
         $this->info(' ');
+
+        $this->call('storage:link');
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);

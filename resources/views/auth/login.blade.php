@@ -7,12 +7,7 @@
               <h1 class="text-left">Sistem PTA Masjid</h1>
           </div>
             <div class="row">
-                <div class="col-8">
-                  {{-- @include('auth.register') --}}
-                </div>
-
-                <div class="col-4">
-                    <label for="" class="">Sudah Ada Akaun ?</label>
+                <div class="col-6">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <!-- Email input -->
@@ -55,6 +50,10 @@
                                 type="submit">Sign in
                         </button>
                     </form>
+                </div>
+
+                <div class="col-4">
+                  <img src="{{ asset('storage/images/login.jpg') }}" class="ms-4 w-100">
                 </div>
             </div>
         </div>

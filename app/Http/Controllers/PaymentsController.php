@@ -53,11 +53,13 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'user_id' => 'required',
-            'amount' => 'required',
-            'description' => 'required',
-        ]);
+        // $validated = $request->validate([
+        //     'user_id' => 'required',
+        //     'amount' => 'required',
+        //     'description' => 'required',
+        // ]);
+
+        dd($request->all());
     }   
 
     /**

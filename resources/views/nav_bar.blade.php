@@ -108,7 +108,7 @@
                                  height="16"
                                  width="16">
                             </svg>
-                            Senarai Bayaran
+                            Bayaran
                         </a>
                     </li>
 
@@ -156,7 +156,7 @@
                     <form action="{{ route('logout') }}"
                           method="POST">
                         @csrf
-                        <li><button class="btn btn-sm">Sign out</button></li>
+                        <li><button class="btn btn-sm text-light">Sign out</button></li>
                     </form>
                 </ul>
             </div>
