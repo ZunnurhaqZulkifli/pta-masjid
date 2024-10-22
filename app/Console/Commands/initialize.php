@@ -58,6 +58,8 @@ class initialize extends Command
         $progress->start();
 
         // Pulling the latest changes from the repository
+        $gs = $this->rCommand('git stash');
+
         $this->info(' ');
         $this->info('Pulling Changes...');
         $this->info(' ');
@@ -68,6 +70,8 @@ class initialize extends Command
             $this->error('Git pull failed!, contanct the administrator');
             return;
         }
+
+        $gsp = $this->rCommand('git stash pop');
 
         $this->info('Installing Updates...');
 
