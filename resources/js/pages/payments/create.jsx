@@ -8,6 +8,7 @@ export default function Payments({ user, forwarding, paymentData, userPayment })
 
     const [activeTab, setActiveTab] = useState(0);
     const [donePayment, setDonePayment] = useState({});
+    const [rows, setRows] = useState(null);
 
     useEffect(() => {
         if (forwarding) {
@@ -15,51 +16,53 @@ export default function Payments({ user, forwarding, paymentData, userPayment })
         }
     });
 
-    const rows = userPayment.map((payment, index) => (
-        <Accordion.Item key={index} value={index.toString()} className=''>
-            <Accordion.Control>
-                <div className="row">
-                    <div className="col-2">{payment.id}</div>
-                    <div className="col-2">{payment.reference_number}</div>
-                    <div className="col-2">{payment.reference_number}</div>
-                    <div className="col-3">{payment.created_at}</div>
-                    <div className="d-flex col-3 justify-content-end">
-                        {payment.amount !== undefined && payment.amount !== null && !isNaN(payment.amount)
-                            ? 'RM ' + Number(payment.amount).toFixed(2)
-                            : '0.00'}
+    if(user !== null && rows === null) {
+        setRows(userPayment.map((payment, index) => (
+            <Accordion.Item key={index} value={index.toString()} className=''>
+                <Accordion.Control>
+                    <div className="row">
+                        <div className="col-2">{payment.id}</div>
+                        <div className="col-2">{payment.reference_number}</div>
+                        <div className="col-2">{payment.reference_number}</div>
+                        <div className="col-3">{payment.created_at}</div>
+                        <div className="d-flex col-3 justify-content-end">
+                            {payment.amount !== undefined && payment.amount !== null && !isNaN(payment.amount)
+                                ? 'RM ' + Number(payment.amount).toFixed(2)
+                                : '0.00'}
+                        </div>
                     </div>
-                </div>
-            </Accordion.Control>
-            <Accordion.Panel>
-                <tr>
-                    <th>Payment</th>
-                    <th>{payment.payment_type_id}</th>
-                </tr>
-                {payment.transactions[0] === undefined ? '' : (
-                    <>
-                        <tr>
-                            <th>Transactions</th>
-                        </tr>
-                        <tr>
-                            <th>
-                                {payment.transactions[0].reason || ''}
-                            </th>
-                            <th>
-                                {payment.transactions[0].payment_type.name || ''}
-                            </th>
-                            <th>
-                                {payment.transactions[0].payment_status.name || ''}
-                            </th>
-                            <th>
-                                {payment.transactions[0].user_payment.card_number || ''}
-                            </th>
-                        </tr>   
-                    </>
-                )}
-
-            </Accordion.Panel>
-        </Accordion.Item>
-    ));
+                </Accordion.Control>
+                <Accordion.Panel>
+                    <tr>
+                        <th>Payment</th>
+                        <th>{payment.payment_type_id}</th>
+                    </tr>
+                    {payment.transactions[0] === undefined ? '' : (
+                        <>
+                            <tr>
+                                <th>Transactions</th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {payment.transactions[0].reason || ''}
+                                </th>
+                                <th>
+                                    {payment.transactions[0].payment_type.name || ''}
+                                </th>
+                                <th>
+                                    {payment.transactions[0].payment_status.name || ''}
+                                </th>
+                                <th>
+                                    {/* {payment.transactions[0].user_payment.card_number || ''} */}
+                                </th>
+                            </tr>   
+                        </>
+                    )}
+    
+                </Accordion.Panel>
+            </Accordion.Item>
+        )))
+    }
 
     return (
         <Tabs color="teal" defaultValue="first">
@@ -95,7 +98,9 @@ export default function Payments({ user, forwarding, paymentData, userPayment })
                         </thead>
                         <tbody>
                             <Accordion defaultValue={'0'}>
-                                {rows}
+                                {
+                                    rows
+                                }
                             </Accordion>
                         </tbody>
                     </table>

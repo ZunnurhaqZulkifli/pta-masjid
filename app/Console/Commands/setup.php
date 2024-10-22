@@ -89,7 +89,7 @@ class setup extends Command
         $this->call('optimize');
         $this->info(' ');
 
-        $this->call('storage:link');
+        // $this->call('storage:link');
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);
