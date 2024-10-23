@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\PublicUserController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TransactionController;
@@ -19,6 +20,7 @@ Route::group(
     function () {
         Route::resource('users', UsersController::class);
         Route::resource('transactions', TransactionController::class);
+        Route::resource('projects', ProjectsController::class);
         Route::resource('payments', PaymentsController::class)->except('create'); // senarai bayaran
     }
 );

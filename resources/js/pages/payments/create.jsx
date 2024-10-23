@@ -75,10 +75,12 @@ export default function Payments({ user, forwarding, paymentData, userPayment })
 
             <Tabs.Panel value="first" pt="xs">
                 <h1 className="mb-4">{user ? 'Semak Akaun' : 'Register Akaun'}</h1>
+                <p href="" className="">Sila Lengkapkan Informasi Bayaran Anda Sebelum Membuat Pembayaran</p>
                 <PaymentStepper
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                     user={user}
+                    userPayment={userPayment}
                     paymentData={paymentData}
                     setDonePayment={setDonePayment}
                     donePayment={donePayment}

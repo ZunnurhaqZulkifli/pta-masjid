@@ -5,7 +5,7 @@ import { Card } from "react-bootstrap";
 import { route } from "ziggy-js";
 import { showNotification } from "@mantine/notifications";
 
-export function RegistrationForm({ activeTab, setActiveTab, user }) {
+export function RegistrationForm({ activeTab, setActiveTab, user, userPayment }) {
     function validator(key, value) {
         switch (key) {
             case 'name':
@@ -74,6 +74,8 @@ export function RegistrationForm({ activeTab, setActiveTab, user }) {
             }
         }
     )
+
+    const [userPaymentInfo, setUserPaymentInfo] = useState((userPayment !== null) ? userPayment[0].transactions[0].user_payment : null);
 
     const [registerValidation, setRegisterValidation] = useState({
         name: '',
@@ -223,6 +225,85 @@ export function RegistrationForm({ activeTab, setActiveTab, user }) {
                         className="col-4"
                         readOnly
                     />
+
+                    <hr className="text-muted mt-4"/>
+
+                    {
+                        (userPaymentInfo !== null)  ? (
+                            <>
+                                <p className=""> Sila Semak dan Lengkapkan Cara Bayaran Anda</p>
+
+                                <TextInput
+                                    label="Card Number"
+                                    name="card_number"
+                                    value={(userPaymentInfo) ? userPaymentInfo.card_number : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                                <TextInput
+                                    label="Card User"
+                                    name="card_user"
+                                    value={(userPaymentInfo) ? userPaymentInfo.card_user : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                                <TextInput
+                                    label="Card Expiry Date"
+                                    name="card_expiry"
+                                    value={(userPaymentInfo) ? userPaymentInfo.card_user : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                                <TextInput
+                                    label="Card CVV"
+                                    name="card_cvv"
+                                    value={(userPaymentInfo) ? userPaymentInfo.card_cvv : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                                <hr className="text-muted mt-4"/>
+
+                                <TextInput
+                                    label="Bank Name"
+                                    name="bank_name"
+                                    value={(userPaymentInfo) ? userPaymentInfo.bank_name : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+                                
+                                <TextInput
+                                    label="Bank Account Number"
+                                    name="bank_account_number"
+                                    value={(userPaymentInfo) ? userPaymentInfo.bank_account_number : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                                <TextInput
+                                    label="Phone Number"
+                                    name="phone_number"
+                                    value={(userPaymentInfo) ? userPaymentInfo.phone_number : ''}
+                                    size="sm"
+                                    className="col-4"
+                                    readOnly
+                                />
+
+                            </>
+                        ) : (
+                            <>
+                            </>
+                        )
+                    }
                 </div>
 
                 {/* <Button className="btn btn-md mt-3"

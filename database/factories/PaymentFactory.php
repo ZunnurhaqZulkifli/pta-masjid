@@ -21,7 +21,7 @@ class PaymentFactory extends Factory
         $date = fake()->dateTimeBetween('-3 year', 'now');
 
         return [
-            'payment_type_id'  => fake()->numberBetween(1, 5),
+            'payment_type_id'  => fake()->numberBetween(1, 3),
             'user_id'          => $user->id,
             'name'             => $user->name,
             'amount'           => fake()->randomFloat(2, 1, 1000),

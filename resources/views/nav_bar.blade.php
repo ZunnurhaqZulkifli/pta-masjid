@@ -86,7 +86,7 @@
                     <li>
                         <hr class="divider">
                         <a href="" class="nav-link text-white">
-                            Data Sistem
+                            Data Sistem ( Admin )
                         </a>
                     </li>
 
@@ -120,6 +120,17 @@
                                  width="16">
                             </svg>
                             Transaksi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link {{ request()->route()->getName() == 'projects.index' ? 'active bg-gradient' : 'text-white' }}"
+                           href="{{ route('projects.index') }}">
+                            <svg class="bi me-2"
+                                 height="16"
+                                 width="16">
+                            </svg>
+                            Project
                         </a>
                     </li>
                 @endif

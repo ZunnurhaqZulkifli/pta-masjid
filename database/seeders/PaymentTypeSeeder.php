@@ -16,9 +16,7 @@ class PaymentTypeSeeder extends Seeder
     {
         $types = [
             'Sumbangan',
-            'Bayaran Zakat',
-            'Bayaran Wakaf',
-            'Khairat',
+            'Bayaran Khairat',
             'Kutipan Jumaat',
         ];
 
