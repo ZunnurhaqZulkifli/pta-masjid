@@ -11,7 +11,7 @@ class setup extends Command
      *
      * @var string
      */
-    protected $signature = 'app:start';
+    protected $signature = 'app:start {seed?}';
 
     /**
      * The console command description.
@@ -50,6 +50,8 @@ class setup extends Command
 
     public function handle()
     {
+        $seed = $this->argument('seed') == 'seed' ? true : false;
+
         $progress = $this->output->createProgressBar(100);
         $this->info(' ');
         $this->info('Starting the application startup process...');
@@ -70,19 +72,24 @@ class setup extends Command
             return;
         }
 
+        if($seed) {
+            $this->info(' ');
+            $this->info('Auto Resetting Database...');
+            $this->call('db:wipe');
+            
+            $this->info(' ');
+            $this->info('Auto Migrating Database...');
+            $this->info(' ');
+            $this->call('migrate:fresh');
+            
+            $this->info('Auto Seed Database...');
+            $this->info(' ');
+            $this->call('db:seed');
+            $this->info(' ');
+        }
+
         $this->info(' ');
-        $this->warn('Auto Resetting Database...');
-        $this->call('db:wipe');
-        
-        $this->info(' ');
-        $this->info('Auto Migrating Database...');
-        $this->info(' ');
-        $this->call('migrate:fresh');
-        
-        $this->info('Auto Seed Database...');
-        $this->info(' ');
-        $this->call('db:seed');
-        $this->info(' ');
+        $this->warn('Skipping Auto Seeding Database...');
 
         $this->warn('Resetting Views...');
         $this->info(' ');
@@ -93,7 +100,7 @@ class setup extends Command
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);
-            sleep(1);
+            sleep(0.3);
         }
 
         $this->info(' ');
@@ -109,7 +116,7 @@ class setup extends Command
 
         for($i = 0; $i < 20; $i++) {
             $progress->advance($i);
-            sleep(1);
+            sleep(0.3);
         }
 
         // Installing NPM dependencies
@@ -117,7 +124,7 @@ class setup extends Command
         $this->info('Installing NPM dependencies...');
         $this->info(' ');
 
-        $npmInstallStatus = $this->rCommand('npm install -f');
+        $npmInstallStatus = $this->rCommand('npm install');
         $progress->advance(70);
         if ($npmInstallStatus !== 0) {
             $this->info(' ');
@@ -130,7 +137,7 @@ class setup extends Command
         $this->info('Building assets with NPM...');
         
         $this->info(' ');
-        $npmBuildStatus = $this->rCommand('npm run dev -f');
+        $npmBuildStatus = $this->rCommand('npm run dev');
 
         $progress->finish();
 
