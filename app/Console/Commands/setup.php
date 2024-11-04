@@ -124,7 +124,7 @@ class setup extends Command
         $this->info('Installing NPM dependencies...');
         $this->info(' ');
 
-        $npmInstallStatus = $this->rCommand('npm install');
+        $npmInstallStatus = $this->rCommand('npm install -f');
         $progress->advance(70);
         if ($npmInstallStatus !== 0) {
             $this->info(' ');
@@ -137,7 +137,7 @@ class setup extends Command
         $this->info('Building assets with NPM...');
         
         $this->info(' ');
-        $npmBuildStatus = $this->rCommand('npm run dev');
+        $npmBuildStatus = $this->rCommand('npm run dev -f');
 
         $progress->finish();
 
