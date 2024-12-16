@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class setup extends Command
 {
@@ -18,12 +19,13 @@ class setup extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Automatically setup the application for server and local deployment.';
 
     /**
      * Execute the console command.
      */
-    protected function rCommand($command)
+
+     protected function rCommand($command)
     {
         $process = proc_open($command, [
             1 => ['pipe', 'w'], // stdout
@@ -48,6 +50,10 @@ class setup extends Command
         return 1;
     }
 
+    protected function upLocal() {
+        //
+    }
+
     public function handle()
     {
         $seed = $this->argument('seed') == 'seed' ? true : false;
@@ -64,7 +70,6 @@ class setup extends Command
         $this->info(' ');
 
         exec('composer install', $output, $returnVar);
-        
         $progress->advance(10);
         if ($returnVar !== 0) {
             $this->info(' ');
@@ -74,7 +79,7 @@ class setup extends Command
 
         if($seed) {
             $this->info(' ');
-            $this->info('Auto Resetting Database...');
+            $this->warn('Auto Resetting Database...');
             $this->call('db:wipe');
             
             $this->info(' ');
@@ -86,45 +91,43 @@ class setup extends Command
             $this->info(' ');
             $this->call('db:seed');
             $this->info(' ');
+        } else {
+            $this->warn('Skipping Database Reset...');
         }
-
-        $this->info(' ');
-        $this->warn('Skipping Auto Seeding Database...');
 
         $this->warn('Resetting Views...');
         $this->info(' ');
         $this->call('optimize');
+        $this->call('config:clear');
         $this->info(' ');
-
-        // $this->call('storage:link');
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);
-            sleep(0.3);
+            sleep(0.1);
         }
 
         $this->info(' ');
         $this->info('Starting Valet dependencies...');
         $this->info(' ');
 
-        exec('valet start', $output, $valetStartupStatus);
-        if ($valetStartupStatus !== 0) {
-            $this->info(' ');
-            $this->error('Valet Startup failed!');
-            return;
-        }
+        // exec('valet start', $output, $valetStartupStatus);
+        // if ($valetStartupStatus !== 0) {
+        //     $this->info(' ');
+        //     $this->error('Valet Startup failed!');
+        //     return;
+        // }
 
-        for($i = 0; $i < 20; $i++) {
-            $progress->advance($i);
-            sleep(0.3);
-        }
+        // for($i = 0; $i < 20; $i++) {
+        //     $progress->advance($i);
+        //     sleep(1);
+        // }
 
         // Installing NPM dependencies
         $this->info(' ');
         $this->info('Installing NPM dependencies...');
         $this->info(' ');
 
-        $npmInstallStatus = $this->rCommand('npm install -f');
+        $npmInstallStatus = $this->rCommand('npm install');
         $progress->advance(70);
         if ($npmInstallStatus !== 0) {
             $this->info(' ');
@@ -137,7 +140,13 @@ class setup extends Command
         $this->info('Building assets with NPM...');
         
         $this->info(' ');
-        $npmBuildStatus = $this->rCommand('npm run dev -f');
+        $npmBuildStatus = $this->rCommand('npm run dev');
+
+        if ($npmBuildStatus !== 0) {
+            $this->info(' ');
+            $this->error('NPM install failed!');
+            return;
+        }
 
         $progress->finish();
 

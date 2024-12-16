@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { createInertiaApp } from '@inertiajs/react';
 import { MantineProvider } from '@mantine/core';
 import { LaravelReactI18nProvider } from 'laravel-react-i18n';

@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\SystemLogs;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class initialize extends Command
 {
@@ -18,12 +20,13 @@ class initialize extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Automatically setup the application server.';
 
     /**
      * Execute the console command.
      */
-    protected function rCommand($command)
+
+     protected function rCommand($command)
     {
         $process = proc_open($command, [
             1 => ['pipe', 'w'], // stdout
@@ -57,28 +60,29 @@ class initialize extends Command
 
         $progress->start();
 
+        // $this->rCommand('git add .');
+
         // Pulling the latest changes from the repository
-        $gs = $this->rCommand('git stash');
-
         $this->info(' ');
-        $this->info('Pulling Changes...');
+        $this->info('Stashing Changes...');
         $this->info(' ');
-        $npmInstallStatus = $this->rCommand('git pull');
 
-        if ($npmInstallStatus !== 0) {
-            $this->info(' ');
-            $this->error('Git pull failed!, contanct the administrator');
-            return;
-        }
 
-        $gsp = $this->rCommand('git stash pop');
+        usleep(2000);
+        // $this->rCommand('git stash');
 
+        // $this->rCommand('rmdir node_modules');
+        // $this->rCommand('rmdir package-lock.json');
+// 
         $this->info('Installing Updates...');
 
         for($i = 0; $i < 80; $i++) {
             $progress->advance(1);
             usleep(25000);
         }
+
+        $this->rCommand('git pull');
+        usleep(2000);
 
         exec('composer install', $output, $returnVar);
         $progress->advance(10);
@@ -87,6 +91,11 @@ class initialize extends Command
             $this->error('Composer installation failed!');
             return;
         }
+
+        // $this->rCommand('git stash pop');
+
+
+        $this->rCommand('php artisan serve --port=8000 --host=192.168.8.100');
 
         $progress->finish();
 
