@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
+use App\Models\PaymentType;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,20 +36,20 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:users',
-            'email' => 'required|email|unique:users',
-            'username' => 'required',
-            'phone_number' => 'required',
+            'name'                  => 'required|string|unique:users',
+            'email'                 => 'required|email|unique:users',
+            'username'              => 'required',
+            'phone_number'          => 'required',
             'identification_number' => 'required',
-            'password' => 'required|string',
+            'password'              => 'required|string',
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->phone_number = $request->phone_number;
-        $user->username = $request->username;
+        $user                        = new User();
+        $user->name                  = $request->name;
+        $user->email                 = $request->email;
+        $user->password              = Hash::make($request->password);
+        $user->phone_number          = $request->phone_number;
+        $user->username              = $request->username;
         $user->identification_number = $request->identification_number;
         $user->save();
 
@@ -55,9 +58,15 @@ class UsersController extends Controller
         $user = Auth::user();
 
         return Inertia::render('payments/create', [
-            'users' => User::all(),
-            'user' => $user ?? null,
-            'forwarding' => 2,
+            'users'      => User::all(),
+            'user'       => $user ?? null,
+            'userPayment' => $userPaymet ?? null,
+            'forwarding' => 0,
+            'paymentData' => [
+                'projects'       => Project::all(),
+                'paymentTypes'   => PaymentType::all(),
+                'paymentMethods' => PaymentMethod::all(),
+            ],
         ]);
     }
 
@@ -66,7 +75,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user     = User::findOrFail($id);
         $payments = $user->payments()->orderBy('created_at', 'desc')->paginate(2);
         return view('users.show', compact('user', 'payments'));
     }
@@ -85,9 +94,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user           = User::findOrFail($id);
+        $user->name     = $request->name;
+        $user->email    = $request->email;
         $user->password = $request->password;
         $user->save();
 

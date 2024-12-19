@@ -16,7 +16,7 @@ export default function Payments({ user, forwarding, paymentData, userPayment })
         }
     });
 
-    if(user !== null && rows === null) {
+    if(forwarding == null && user !== null && rows === null) {
         setRows(userPayment.map((payment, index) => (
             <Accordion.Item key={index} value={index.toString()} className=''>
                 <Accordion.Control>

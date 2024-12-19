@@ -67,19 +67,6 @@
                     Statistik
                 </a>
             </li>
-            @if(!Auth::check())
-            <li>
-                <a class="nav-link {{ request()->route()->getName() == 'login' ? 'active bg-gradient' : 'text-white' }}"
-                   href="{{ route('login') }}">
-                    <svg class="bi me-2"
-                         height="16"
-                         width="16">
-                        {{-- <use xlink:href="#table" /> --}}
-                    </svg>
-                    Log Masuk
-                </a>
-            </li>
-            @endif
 
             @if (Auth::check())
                 @if (Auth::user()->hasRole('admin'))

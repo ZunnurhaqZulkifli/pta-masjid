@@ -1,11 +1,24 @@
 import { useForm } from "laravel-precognition-react-inertia";
 import React, { Fragment, useEffect, useState } from 'react';
 import { Button, Stepper, Group, TextInput, Text, Grid } from '@mantine/core';
-import { Card } from "react-bootstrap";
 import { route } from "ziggy-js";
 import { showNotification } from "@mantine/notifications";
 
 export function RegistrationForm({ activeTab, setActiveTab, user, userPayment }) {
+
+    const [userPaymentInfo, setUserPaymentInfo] = useState(null);
+    const [hasPayment, setHasPayment] = useState(false);
+
+    useEffect(() => {
+        if (userPayment && userPayment.length > 0) {
+            setUserPaymentInfo(userPayment[0].transactions[0]);
+            setHasPayment(true);
+        } else {
+            setUserPaymentInfo(null);
+            setHasPayment(false);
+        }
+    }, [userPayment]);
+
     function validator(key, value) {
         switch (key) {
             case 'name':
@@ -47,7 +60,7 @@ export function RegistrationForm({ activeTab, setActiveTab, user, userPayment })
                 }
         }
     }
-    
+
     const form = useForm(
         'post',
         route('users.store'),
@@ -74,8 +87,6 @@ export function RegistrationForm({ activeTab, setActiveTab, user, userPayment })
             }
         }
     )
-
-    const [userPaymentInfo, setUserPaymentInfo] = useState((userPayment !== null) ? userPayment[0].transactions[0].user_payment : null);
 
     const [registerValidation, setRegisterValidation] = useState({
         name: '',
@@ -177,7 +188,7 @@ export function RegistrationForm({ activeTab, setActiveTab, user, userPayment })
         });
     }
 
-    const registeredUserForms = (
+    const registeredUserForms = (userPaymentInfo = null) => (
         <Fragment>
             <form>
                 <div className="row">
@@ -226,101 +237,52 @@ export function RegistrationForm({ activeTab, setActiveTab, user, userPayment })
                         readOnly
                     />
 
-                    <hr className="text-muted mt-4"/>
+                    <hr className="text-muted mt-4" />
 
                     {
-                        (userPaymentInfo !== null)  ? (
+                        (userPaymentInfo) ? (
                             <>
-                                <p className=""> Sila Semak dan Lengkapkan Cara Bayaran Anda</p>
+                                <p className=""> Cara Bayaran Anda</p>
 
                                 <TextInput
                                     label="Card Number"
                                     name="card_number"
-                                    value={(userPaymentInfo) ? userPaymentInfo.card_number : ''}
+                                    value={(userPaymentInfo) ? userPaymentInfo.user_payment?.card_number : ''}
                                     size="sm"
                                     className="col-4"
-                                    readOnly
                                 />
 
                                 <TextInput
                                     label="Card User"
                                     name="card_user"
-                                    value={(userPaymentInfo) ? userPaymentInfo.card_user : ''}
+                                    value={(userPaymentInfo) ? userPaymentInfo.user_payment?.card_user : ''}
                                     size="sm"
                                     className="col-4"
-                                    readOnly
                                 />
-
-                                <TextInput
-                                    label="Card Expiry Date"
-                                    name="card_expiry"
-                                    value={(userPaymentInfo) ? userPaymentInfo.card_user : ''}
-                                    size="sm"
-                                    className="col-4"
-                                    readOnly
-                                />
-
-                                <TextInput
-                                    label="Card CVV"
-                                    name="card_cvv"
-                                    value={(userPaymentInfo) ? userPaymentInfo.card_cvv : ''}
-                                    size="sm"
-                                    className="col-4"
-                                    readOnly
-                                />
-
-                                <hr className="text-muted mt-4"/>
-
-                                <TextInput
-                                    label="Bank Name"
-                                    name="bank_name"
-                                    value={(userPaymentInfo) ? userPaymentInfo.bank_name : ''}
-                                    size="sm"
-                                    className="col-4"
-                                    readOnly
-                                />
-                                
-                                <TextInput
-                                    label="Bank Account Number"
-                                    name="bank_account_number"
-                                    value={(userPaymentInfo) ? userPaymentInfo.bank_account_number : ''}
-                                    size="sm"
-                                    className="col-4"
-                                    readOnly
-                                />
-
-                                <TextInput
-                                    label="Phone Number"
-                                    name="phone_number"
-                                    value={(userPaymentInfo) ? userPaymentInfo.phone_number : ''}
-                                    size="sm"
-                                    className="col-4"
-                                    readOnly
-                                />
-
+                                <hr className="text-muted mt-4" />
                             </>
                         ) : (
                             <>
                             </>
                         )
                     }
+
+                    <Button className="btn btn-md mt-3"
+                        disabled={registerValidation.name || registerValidation.email || registerValidation.username || registerValidation.phone_number || registerValidation.identification_number || registerValidation.password}
+                        onClick={() =>
+                            setActiveTab(1)
+                        }>
+                        Next
+                    </Button>
+
+                    {/* <Button className="btn btn-md mt-3 mr-2"
+                        disabled={registerValidation.name || registerValidation.email || registerValidation.username || registerValidation.phone_number || registerValidation.identification_number || registerValidation.password}
+                        onClick={
+                            onSubmit
+                        }>
+                        Update
+                    </Button> */}
                 </div>
-
-                {/* <Button className="btn btn-md mt-3"
-                    disabled={registerValidation.name || registerValidation.email || registerValidation.username || registerValidation.phone_number || registerValidation.identification_number || registerValidation.password}
-                    onClick={
-                        onSubmit
-                    }>
-                    Update
-                </Button> */}
-
-                <Button className="btn btn-md mt-3"
-                    disabled={registerValidation.name || registerValidation.email || registerValidation.username || registerValidation.phone_number || registerValidation.identification_number || registerValidation.password}
-                    onClick={() =>
-                        setActiveTab(1)
-                    }>
-                    Next
-                </Button>
             </form>
         </Fragment>
     );
@@ -450,12 +412,14 @@ export function RegistrationForm({ activeTab, setActiveTab, user, userPayment })
 
     useEffect(() => {
         if (user) {
-            setForms(registeredUserForms);
+            setForms(registeredUserForms(userPaymentInfo));
         } else {
             setForms(guestUserForms);
         }
 
-    }, [user, registerValidation, loginValidation]);
+        // console.log('User Payment Info', userPaymentInfo.user_payment);
+
+    }, [user, userPaymentInfo, registerValidation, loginValidation]);
 
     const [forms, setForms] = useState(user ? registeredUserForms : guestUserForms);
 

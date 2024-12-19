@@ -18,8 +18,7 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::
-            orderBy('id', 'desc')
+        $payments = Payment::orderBy('id', 'desc')
             ->with(
                 'user',
                 'paymentType',

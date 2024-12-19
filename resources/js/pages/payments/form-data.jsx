@@ -23,7 +23,7 @@ const methodForms = (user, paymentForm) => ({
                     type="text" 
                     name="card_holder" 
                     placeholder="Card Holder" 
-                    defaultValue={user.name ?? ''} 
+                    defaultValue={user.name ?? ''}
                     label="Card Holder"
                     onChange={(value) => {
                         paymentForm.setData('card_user', value.target.value)

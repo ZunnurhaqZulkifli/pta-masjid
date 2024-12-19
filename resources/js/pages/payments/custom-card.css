@@ -1,0 +1,89 @@
+@media print {
+    @page {
+        size: landscape;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .receipt-card, .receipt-card * {
+        visibility: visible;
+    }
+
+    .receipt-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.custom-card {
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px #dcdcdc;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: #959595;
+}
+
+.custom-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.custom-table th {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.row-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.image-content {
+    flex: 0 0 auto;
+    margin-left: 20px;
+}
+
+.image-content img {
+    max-width: 100px; /* Adjust the size as needed */
+    height: auto;
+}
+
+.fs-7 {
+    font-size: 0.700rem;
+    color: #959595;
+    /* font-style: italic; */
+}
+
+.fs-8 {
+    font-size: 0.800rem;
+    color: #000000;
+    font-style: bold;
+}
+
+.button-reciept {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    width: 20%;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
